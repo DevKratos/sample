@@ -6,6 +6,6 @@ import retrofit2.http.GET
 interface DataApi {
 
     @GET("api/json-storage/bin/edfefba")
-    suspend fun getData() : ApiResponse
+    suspend fun getData(): ApiResponse
 
 }

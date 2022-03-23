@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.amansour.sampleapplication.databinding.FragmentHomeBinding
 import com.amansour.sampleapplication.features.home.presentation.adapters.HomeAdapter
 import com.amansour.sampleapplication.features.home.presentation.viewmodels.HomeViewModel
@@ -34,8 +35,12 @@ class HomeFragment : Fragment() {
         val adapter = HomeAdapter()
         binding.homeRecycler.adapter = adapter
         viewModel.homeData.observe(viewLifecycleOwner) {
-            adapter.items = it
+            adapter.items = it.map { it.copy { setupNavigation(it.id) } }
         }
+    }
+
+    private fun setupNavigation(id: Int) {
+        findNavController().navigate(HomeFragmentDirections.homeToDetails(id))
     }
 
 

@@ -6,7 +6,12 @@ import com.amansour.sampleapplication.features.home.domain.repositories.HomeRepo
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(private val homeApi: DataApi) : HomeRepository {
+    //Keep data in ram for fast access.
+    var dataHolder: ApiResponse? = null
+
     override suspend fun getData(): ApiResponse {
-        return homeApi.getData()
+        return dataHolder ?: homeApi.getData().also {
+            dataHolder = it
+        }
     }
 }
