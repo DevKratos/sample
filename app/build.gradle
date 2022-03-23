@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'kotlin-android'
+    id 'kotlinx-serialization'
 }
 
 android {
@@ -72,5 +74,8 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:${okhttp_version}"
     implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${kotlinxConverter}"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:${serialization}"
+
+    def glide_version = "4.13.0"
+    implementation "com.github.bumptech.glide:glide:${glide_version}"
 
 }
