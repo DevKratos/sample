@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -8,34 +10,88 @@
             type="com.amansour.sampleapplication.features.home.domain.models.HomeUiItem" />
     </data>
 
-    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:onClick="@{() -> data.action.invoke()}"
-        android:orientation="vertical">
+        app:cardCornerRadius="5dp">
 
-        <ImageView
-            url="@{data.imageUrl}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{data.imageTag}" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{data.title}" />
+            <FrameLayout
+                android:id="@+id/itemHomeImage"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="H,150:83"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{data.extras}" />
 
-    </LinearLayout>
+                <ImageView
+                    url="@{data.imageUrl}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintDimensionRatio="H,150:83"
+                    tools:background="@color/teal_200" />
+
+                <ImageView
+                    visible="@{data.showPlay}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_play" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/itemHomeTag"
+                style="@style/tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/bg_tag_item_home"
+                android:text="@{data.imageTag}"
+                app:layout_constraintBottom_toBottomOf="@id/itemHomeImage"
+                app:layout_constraintStart_toStartOf="@id/itemHomeImage"
+                app:layout_constraintTop_toBottomOf="@id/itemHomeImage"
+                tools:text="FOOTBALL" />
+
+            <TextView
+                android:id="@+id/itemHomeTitle"
+                style="@style/Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="10dp"
+                android:text="@{data.title}"
+                app:layout_constraintEnd_toEndOf="@id/itemHomeImage"
+                app:layout_constraintStart_toStartOf="@id/itemHomeImage"
+                app:layout_constraintTop_toBottomOf="@id/itemHomeTag"
+                tools:text="Oxlade-Chamberlain, Hudson-Odoi and Stones regain England places" />
+
+
+            <TextView
+                style="@style/extra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:text="@{data.extras}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/itemHomeTitle"
+                app:layout_constraintTop_toBottomOf="@id/itemHomeTitle"
+                tools:text="By James Gray - 12 min ago" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
 
 </layout>

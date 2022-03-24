@@ -1,5 +1,6 @@
 package com.amansour.sampleapplication.features.home.domain.usecases
 
+import com.amansour.sampleapplication.extensions.getPastDuration
 import com.amansour.sampleapplication.extensions.mergeLists
 import com.amansour.sampleapplication.features.home.domain.models.HomeUiItem
 import com.amansour.sampleapplication.features.home.domain.models.Story
@@ -20,9 +21,11 @@ class HomeUseCase @Inject constructor(private val homeRepository: HomeRepository
 }
 
 private fun Video.toHomeUi(): HomeUiItem {
-    return HomeUiItem(id, thumb, sport.name, title, "$views")
+    return HomeUiItem(id, thumb, sport.name, title, "$views views", true)
 }
 
 private fun Story.toHomeUi(): HomeUiItem {
-    return HomeUiItem(id, image, sport.name, title, "$date")
+    val duration = (date * 1000).toLong().getPastDuration()
+
+    return HomeUiItem(id, image, sport.name, title, "By $author - $duration")
 }

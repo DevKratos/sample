@@ -6,5 +6,6 @@ data class HomeUiItem(
     val imageTag: String,
     val title: String,
     val extras: String,
+    val showPlay: Boolean = false,
     var action: (() -> Unit)? = null
 )
