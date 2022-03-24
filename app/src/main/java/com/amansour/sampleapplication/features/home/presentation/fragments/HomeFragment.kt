@@ -11,6 +11,7 @@ import com.amansour.sampleapplication.MainActivity
 import com.amansour.sampleapplication.databinding.FragmentHomeBinding
 import com.amansour.sampleapplication.features.home.presentation.adapters.HomeAdapter
 import com.amansour.sampleapplication.features.home.presentation.viewmodels.HomeViewModel
+import com.amansour.sampleapplication.features.video.presentation.VideoActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,7 +42,7 @@ class HomeFragment : Fragment() {
             adapter.items = items.map {
                 it.copy {
                     if (it.showPlay) {
-                        setupVideo()
+                        setupVideo(it.id)
                     } else {
                         setupNavigation(it.id)
                     }
@@ -50,13 +51,12 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setupVideo() {
-        TODO("Not yet implemented")
+    private fun setupVideo(id: Int) {
+        startActivity(VideoActivity.getIntent(requireContext(), id))
     }
 
     private fun setupNavigation(id: Int) {
         findNavController().navigate(HomeFragmentDirections.homeToDetails(id))
     }
-
 
 }

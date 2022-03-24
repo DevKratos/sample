@@ -10,8 +10,13 @@ class HomeRepositoryImpl @Inject constructor(private val homeApi: DataApi) : Hom
     var dataHolder: ApiResponse? = null
 
     override suspend fun getData(): ApiResponse {
-        return dataHolder ?: homeApi.getData().also {
-            dataHolder = it
+
+        return try {
+            dataHolder ?: homeApi.getData().also {
+                dataHolder = it
+            }
+        } catch (e: Exception){
+            ApiResponse(null, null)
         }
     }
 }
