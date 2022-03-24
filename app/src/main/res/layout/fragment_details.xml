@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -8,14 +9,121 @@
             type="com.amansour.sampleapplication.features.details.presentation.DetailsViewModel" />
     </data>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="@{viewModel.detailsData.title}"
-            android:layout_height="wrap_content" />
 
-    </FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/detailsImage"
+                url="@{viewModel.detailsData.imageUrl}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="H,150:83"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@color/teal_200" />
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/detailsToolbar"
+                android:layout_width="0dp"
+                app:navigationIcon="@drawable/ic_back"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:padding="10dp"
+                    android:onClick="@{() -> viewModel.onShareClicked()}"
+                    android:src="@drawable/ic_share"/>
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <TextView
+                android:id="@+id/detailsTag"
+                style="@style/tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/bg_tag_item_home"
+                android:text="@{viewModel.detailsData.tag}"
+                app:layout_constraintBottom_toBottomOf="@id/detailsImage"
+                app:layout_constraintStart_toStartOf="@id/detailsImage"
+                app:layout_constraintTop_toBottomOf="@id/detailsImage"
+                tools:text="FOOTBALL" />
+
+            <TextView
+                android:id="@+id/detailsTitle"
+                style="@style/Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="10dp"
+                android:text="@{viewModel.detailsData.title}"
+                app:layout_constraintEnd_toEndOf="@id/detailsImage"
+                app:layout_constraintStart_toStartOf="@id/detailsImage"
+                app:layout_constraintTop_toBottomOf="@id/detailsTag"
+                tools:text="Oxlade-Chamberlain, Hudson-Odoi and Stones regain England places" />
+
+
+            <TextView
+                android:id="@+id/detailsAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="By"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/detailsTitle"
+                app:layout_constraintTop_toBottomOf="@id/detailsTitle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textColor="@color/light_blue"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/detailsAuthor"
+                app:layout_constraintStart_toEndOf="@id/detailsAuthor"
+                app:layout_constraintTop_toTopOf="@id/detailsAuthor"
+                tools:text="John Stone" />
+
+            <TextView
+                android:id="@+id/detailsDate"
+                style="@style/extra"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="15dp"
+                android:text="@{viewModel.detailsData.date}"
+                app:layout_constraintStart_toStartOf="@id/detailsAuthor"
+                app:layout_constraintTop_toBottomOf="@id/detailsAuthor"
+                tools:text="12 min ago" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:layout_marginBottom="100dp"
+                android:text="@{viewModel.detailsData.description}"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@id/detailsTitle"
+                app:layout_constraintStart_toStartOf="@id/detailsTitle"
+                app:layout_constraintTop_toBottomOf="@id/detailsDate" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </layout>

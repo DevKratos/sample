@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="blue">#141b4d</color>
+    <color name="light_blue">#4caeff</color>
     <color name="gray">#8c8c8c</color>
     <color name="surface_gray">#f2f2f2</color>
 </resources>
